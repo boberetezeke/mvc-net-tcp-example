@@ -1,0 +1,2 @@
+﻿<%@ Application Inherits="TestMVCNet.MvcApplication" %>
+
