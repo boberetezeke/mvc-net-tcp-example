@@ -1,2 +1,9 @@
-﻿<h2>Welcome to ASP.NET MVC @ViewData["Version"] on @ViewData["Runtime"]!</h2>
+﻿@model TestMVCNet.LogInfo
 
+<h2>Welcome to ASP.NET MVC @ViewData["Version"] on @ViewData["Runtime"]!</h2>
+<h3>Log Lines - @Model.testString</h3>
+<ul>
+	@foreach(string logLine in Model.logLines) {
+		<li>@logLine</li>
+	}
+</ul>

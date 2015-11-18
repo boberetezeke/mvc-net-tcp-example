@@ -17,7 +17,7 @@ namespace TestMVCNet.Controllers
 			ViewData ["Version"] = mvcName.Version.Major + "." + mvcName.Version.Minor;
 			ViewData ["Runtime"] = isMono ? "Mono" : ".NET";
 
-			return View ();
+			return View ("Index", this.HttpContext.Application["logInfo"]);
 		}
 	}
 }

@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+//using TestMVCNet.LogInfo;
 
 namespace TestMVCNet
 {
@@ -22,14 +23,16 @@ namespace TestMVCNet
 	public class AsynchronousSocketListener {
 		// Thread signal.
 		public ManualResetEvent allDone;
+		public LogInfo logInfo;
 
-		public AsynchronousSocketListener() {
+		public AsynchronousSocketListener(LogInfo _logInfo) {
+			logInfo = _logInfo;
 			allDone = new ManualResetEvent(false);
 		}
 
 		public void StartListening() {
 			// Data buffer for incoming data.
-			byte[] bytes = new Byte[1024];
+			//byte[] bytes = new Byte[1024];
 
 			// Establish the local endpoint for the socket.
 			// The DNS name of the computer
@@ -100,13 +103,14 @@ namespace TestMVCNet
 				// Check for end-of-file tag. If it is not there, read 
 				// more data.
 				content = state.sb.ToString();
+				logInfo.appendLogEntry (content);
 				if (content.IndexOf("<EOF>") > -1) {
 					// All the data has been read from the 
 					// client. Display it on the console.
 					Console.WriteLine("Read {0} bytes from socket. \n Data : {1}",
 						content.Length, content );
 					// Echo the data back to the client.
-					Send(handler, content);
+					// Send(handler, content);
 				} else {
 					// Not all data received. Get more.
 					handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0,

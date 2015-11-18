@@ -11,6 +11,7 @@ namespace TestMVCNet
 {
 	public class MvcApplication : System.Web.HttpApplication
 	{
+		public LogInfo logInfo;
 		public Thread listenerThread;
 		public AsynchronousSocketListener socketListener;
 
@@ -37,8 +38,9 @@ namespace TestMVCNet
 			RegisterGlobalFilters (GlobalFilters.Filters);
 			RegisterRoutes (RouteTable.Routes);
 
-
-			socketListener = new AsynchronousSocketListener ();
+			logInfo = new LogInfo ();
+			Application ["logInfo"] = logInfo;
+			socketListener = new AsynchronousSocketListener (logInfo);
 			listenerThread = new Thread (new ThreadStart (socketListener.StartListening));
 
 			listenerThread.Start ();

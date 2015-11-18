@@ -74,6 +74,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="AsynchronousSocketListener.cs" />
+    <Compile Include="Models\LogInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
